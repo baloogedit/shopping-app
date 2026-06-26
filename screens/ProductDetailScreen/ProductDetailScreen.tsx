@@ -85,7 +85,11 @@ export default function ProductDetailScreen() {
                                             );
                                         }}
                                     >
-                                        <Text style={styles.buttonText}>-</Text>
+                                        <Ionicons
+                                            name="remove"
+                                            size={22}
+                                            color="#202841"
+                                        />
                                     </TouchableOpacity>
                                     <Text style={styles.quantityText}>
                                         {quantity}
@@ -101,7 +105,11 @@ export default function ProductDetailScreen() {
                                             );
                                         }}
                                     >
-                                        <Text style={styles.buttonText}>+</Text>
+                                        <Ionicons
+                                            name="add"
+                                            size={22}
+                                            color="#202841"
+                                        />
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -131,7 +139,7 @@ export default function ProductDetailScreen() {
                             </Text>
 
                             <View>
-                                <Ionicons name="star" size={20} color="gold" />
+                                <Ionicons name="star" size={22} color="gold" />
                                 <Text style={styles.reviews}>
                                     Reviews: {product.rating} / 5
                                 </Text>
@@ -232,13 +240,14 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
     },
     buttonText: {
-        fontSize: 20,
+        fontSize: 22,
         fontWeight: "bold",
         color: "#202841",
-        lineHeight: 22,
+        textAlign: "center",
+        includeFontPadding: false,
     },
     quantityText: {
-        fontSize: 20,
+        fontSize: 22,
         fontWeight: "bold",
         marginHorizontal: 20,
         width: 30,
