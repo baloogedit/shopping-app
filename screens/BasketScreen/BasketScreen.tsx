@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from "react-native";
 
 export default function BasketScreen() {
     return (
@@ -11,12 +11,12 @@ export default function BasketScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#aab9e7', // Adjust to match your theme
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#aab9e7", // Adjust to match your theme
     },
     text: {
         fontSize: 20,
-        fontWeight: 'bold',
-    }
+        fontWeight: "bold",
+    },
 });

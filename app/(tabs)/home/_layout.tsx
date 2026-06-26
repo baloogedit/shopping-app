@@ -1,13 +1,18 @@
-import { Stack } from 'expo-router';
-import 'react-native-reanimated';
+import { Stack } from "expo-router";
+import "react-native-reanimated";
 
 export default function HomeLayout() {
-  return (
-    <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="index/[products]" options={{ headerShown: false }} />
-    </Stack>
-  );
+    return (
+        <Stack>
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen
+                name="index/[products]"
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="index/[products]/[productdetail]"
+                options={{ headerShown: false }}
+            />
+        </Stack>
+    );
 }
-
-
