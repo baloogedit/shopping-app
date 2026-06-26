@@ -21,7 +21,7 @@ export default function HomeScreen() {
                 }}
                 onPress={() => router.push(
                 {
-                    pathname: "/home/[products]",
+                    pathname: "/home/[products]" as any,
                     params: { products: item },
                 })}
             >
