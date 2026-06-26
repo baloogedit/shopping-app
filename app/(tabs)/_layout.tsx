@@ -18,6 +18,12 @@ export default function TabLayout() {
                 <Label>Home</Label>
                 <Icon src={LUCIDE_HOME_ICON} />
             </NativeTabs.Trigger>
+
+            //TODO: finish basket tab
+            <NativeTabs.Trigger name="basket">
+                <Label>Basket</Label>
+                <Icon src={LUCIDE_BASKET_ICON} />
+            </NativeTabs.Trigger>
         </NativeTabs>
     );
 }

@@ -9,12 +9,20 @@ export default function HomeScreen() {
 
     const renderItem = ({ item } : {item: any}) => {
         return (
-            <TouchableOpacity style={{margin:30, borderWidth:3 }} >
+            <TouchableOpacity style={
+                    {
+                        backgroundColor:"lightgray",
+                        margin:30,
+                        borderWidth:3,
+                        borderRadius:10,
+                    }}
+            >
                 <View>
                     <Text
                         style={{
+                            textTransform:"capitalize",
                             fontSize:25,
-                            color:"green",
+                            color:"black",
                             fontWeight:"900",
                         }}
                     >
