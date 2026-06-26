@@ -194,11 +194,11 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     scrollContent: {
-        paddingBottom: 175,
+        paddingBottom: 100,
     },
     imageBox: {
         width: "100%",
-        height: 250,
+        height: 300,
         backgroundColor: "#fff",
         marginBottom: 20,
     },
@@ -290,7 +290,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#aab9e7",
         paddingHorizontal: 20,
         paddingTop: 5,
-        paddingBottom: 90,
+        paddingBottom: 5,
         borderTopWidth: 1,
         borderTopColor: "#aab9e7",
     },

@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     },
     listContent: {
         paddingHorizontal: 10,
-        paddingBottom: 60,
+        paddingBottom: 5,
     },
     row: {
         justifyContent: "space-between",
