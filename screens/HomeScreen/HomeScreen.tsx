@@ -21,7 +21,6 @@ export default function HomeScreen() {
             >
                 <View style={styles.cardInner}>
                     <Text style={styles.cardText}>{item}</Text>
-
                     <View style={styles.circle} />
                 </View>
             </TouchableOpacity>

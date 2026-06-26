@@ -93,8 +93,8 @@ const styles = StyleSheet.create({
         color: "#000",
     },
     listContent: {
-        paddingHorizontal: 12,
-        paddingBottom: 40,
+        paddingHorizontal: 10,
+        paddingBottom: 60,
     },
     row: {
         justifyContent: "space-between",
@@ -105,12 +105,12 @@ const styles = StyleSheet.create({
         flex: 1,
         marginHorizontal: 8,
         alignItems: "center",
-        maxWidth: "45%", // Ensures cards don't stretch too wide
+        maxWidth: "45%",
     },
     imageContainer: {
         width: "100%",
         aspectRatio: 1,
-        backgroundColor: "#38456a",
+        backgroundColor: "#fff",
         borderRadius: 16,
         overflow: "hidden",
         marginBottom: 12,

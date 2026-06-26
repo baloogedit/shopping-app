@@ -12,14 +12,13 @@ import {
 } from "react-native";
 
 export default function ProductDetailScreen() {
-    const { id } = useLocalSearchParams<{ id: string }>();
+    const { productdetail } = useLocalSearchParams<{ productdetail: string }>();
     const router = useRouter();
 
-    // Fetch data for just this one product
     const { data, loading, error } = useFetch(
-        `https://dummyjson.com/products/${id}`,
+        `https://dummyjson.com/products/${productdetail}`,
     );
-    const product: any = data; 
+    const product: any = data;
 
     return (
         <View style={styles.container}>
@@ -33,8 +32,7 @@ export default function ProductDetailScreen() {
                     <Ionicons name="arrow-back" size={20} color="white" />
                 </TouchableOpacity>
                 <Text style={styles.headerTitle}>Details</Text>
-                <View style={{ width: 36 }} />{" "}
-                
+                <View style={{ width: 36 }} />
             </View>
 
             {loading ? (
@@ -65,15 +63,12 @@ export default function ProductDetailScreen() {
                             <Text style={styles.brand}>{product.brand}</Text>
                             <Text style={styles.title}>{product.title}</Text>
                             <Text style={styles.price}>${product.price}</Text>
-
                             <Text style={styles.sectionTitle}>Description</Text>
                             <Text style={styles.description}>
                                 {product.description}
                             </Text>
                         </View>
                     </ScrollView>
-
-                    {/* Sticky Bottom Action Bar */}
                     <View style={styles.bottomBar}>
                         <TouchableOpacity style={styles.addToCartButton}>
                             <Text style={styles.addToCartText}>
@@ -90,20 +85,20 @@ export default function ProductDetailScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
+        backgroundColor: "#aab9e7",
     },
     header: {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
         paddingHorizontal: 20,
-        paddingTop: 60,
+        paddingTop: 20,
         paddingBottom: 10,
     },
     backButton: {
         width: 36,
         height: 36,
-        backgroundColor: "#1a1a1a",
+        backgroundColor: "#202841",
         borderRadius: 18,
         alignItems: "center",
         justifyContent: "center",
@@ -123,12 +118,12 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     scrollContent: {
-        paddingBottom: 100, 
+        paddingBottom: 100,
     },
     imageBox: {
         width: "100%",
-        height: 300,
-        backgroundColor: "#f5f5f5",
+        height: 250,
+        backgroundColor: "#fff",
         marginBottom: 20,
     },
     mainImage: {
@@ -140,7 +135,7 @@ const styles = StyleSheet.create({
     },
     brand: {
         fontSize: 16,
-        color: "#888",
+        color: "#5351bd",
         textTransform: "uppercase",
         fontWeight: "600",
         marginBottom: 4,
@@ -173,12 +168,12 @@ const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
-        backgroundColor: "#fff",
+        backgroundColor: "#aab9e7",
         paddingHorizontal: 20,
-        paddingTop: 15,
-        paddingBottom: 30, // Pad for bottom screen edge
+        paddingTop: 5,
+        paddingBottom: 90,
         borderTopWidth: 1,
-        borderTopColor: "#eee",
+        borderTopColor: "#aab9e7",
     },
     addToCartButton: {
         backgroundColor: "#202841",
