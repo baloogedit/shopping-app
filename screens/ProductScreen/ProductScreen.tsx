@@ -61,7 +61,6 @@ export default function ProductsScreen() {
                 columnWrapperStyle={styles.row}
                 contentContainerStyle={styles.listContent}
                 renderItem={renderProduct}
-                showsVerticalScrollIndicator={false}
             />
         </View>
     );

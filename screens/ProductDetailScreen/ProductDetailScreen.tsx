@@ -1,6 +1,7 @@
 import useFetch from "@/hooks/useFetch";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
+import { useState } from "react";
 import {
     ActivityIndicator,
     Image,
@@ -14,6 +15,7 @@ import {
 export default function ProductDetailScreen() {
     const { productdetail } = useLocalSearchParams<{ productdetail: string }>();
     const router = useRouter();
+    const [quantity, setQuantity] = useState(1);
 
     const { data, loading, error } = useFetch(
         `https://dummyjson.com/products/${productdetail}`,
@@ -31,7 +33,7 @@ export default function ProductDetailScreen() {
                 >
                     <Ionicons name="arrow-back" size={20} color="white" />
                 </TouchableOpacity>
-                <Text style={styles.headerTitle}>Details</Text>
+                <Text style={styles.headerTitle}>{product.title}</Text>
                 <View style={{ width: 36 }} />
             </View>
 
@@ -48,7 +50,7 @@ export default function ProductDetailScreen() {
             ) : (
                 <>
                     <ScrollView
-                        showsVerticalScrollIndicator={false}
+                        style={{ flex: 1 }}
                         contentContainerStyle={styles.scrollContent}
                     >
                         <View style={styles.imageBox}>
@@ -60,9 +62,80 @@ export default function ProductDetailScreen() {
                         </View>
 
                         <View style={styles.infoContainer}>
-                            <Text style={styles.brand}>{product.brand}</Text>
-                            <Text style={styles.title}>{product.title}</Text>
-                            <Text style={styles.price}>${product.price}</Text>
+                            <View
+                                style={{
+                                    flexDirection: "row",
+                                    justifyContent: "space-between",
+                                }}
+                            >
+                                <Text style={styles.brand}>
+                                    {product.brand}
+                                </Text>
+                                <View
+                                    style={{
+                                        flexDirection: "row",
+                                        justifyContent: "space-between",
+                                    }}
+                                >
+                                    <TouchableOpacity
+                                        style={styles.circleButton}
+                                        onPress={() => {
+                                            setQuantity(
+                                                Math.max(1, quantity - 1),
+                                            );
+                                        }}
+                                    >
+                                        <Text style={styles.buttonText}>-</Text>
+                                    </TouchableOpacity>
+                                    <Text style={styles.quantityText}>
+                                        {quantity}
+                                    </Text>
+                                    <TouchableOpacity
+                                        style={styles.circleButton}
+                                        onPress={() => {
+                                            setQuantity(
+                                                Math.min(
+                                                    product.stock,
+                                                    quantity + 1,
+                                                ),
+                                            );
+                                        }}
+                                    >
+                                        <Text style={styles.buttonText}>+</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                            <View
+                                style={{
+                                    flexDirection: "row",
+                                    justifyContent: "space-between",
+                                }}
+                            >
+                                <Text style={styles.price}>
+                                    ${product.price}
+                                </Text>
+                                <Text style={styles.available}>
+                                    On stock: {product.stock}
+                                </Text>
+                            </View>
+                            <Text style={styles.discount}>
+                                Discount: {product.discountPercentage}% (Final
+                                price: $
+                                {(
+                                    product.price -
+                                    (product.price *
+                                        product.discountPercentage) /
+                                        100
+                                ).toFixed(2)}
+                                )
+                            </Text>
+
+                            <View>
+                                <Ionicons name="star" size={20} color="gold" />
+                                <Text style={styles.reviews}>
+                                    Reviews: {product.rating} / 5
+                                </Text>
+                            </View>
                             <Text style={styles.sectionTitle}>Description</Text>
                             <Text style={styles.description}>
                                 {product.description}
@@ -106,6 +179,9 @@ const styles = StyleSheet.create({
     headerTitle: {
         fontSize: 20,
         fontWeight: "bold",
+        alignSelf: "center",
+        width: "60%",
+        textAlign: "center",
     },
     centerSpacing: {
         marginTop: 50,
@@ -118,7 +194,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     scrollContent: {
-        paddingBottom: 100,
+        paddingBottom: 175,
     },
     imageBox: {
         width: "100%",
@@ -140,6 +216,38 @@ const styles = StyleSheet.create({
         fontWeight: "600",
         marginBottom: 4,
     },
+    quantityContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginTop: 20,
+    },
+    circleButton: {
+        height: 36,
+        width: 36,
+        borderRadius: 18,
+        borderWidth: 1,
+        borderColor: "#202841",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#fff",
+    },
+    buttonText: {
+        fontSize: 20,
+        fontWeight: "bold",
+        color: "#202841",
+        lineHeight: 22,
+    },
+    quantityText: {
+        fontSize: 20,
+        fontWeight: "bold",
+        marginHorizontal: 20,
+        width: 30,
+        textAlign: "center",
+    },
+    available: {
+        fontSize: 14,
+        fontWeight: "600",
+    },
     title: {
         fontSize: 28,
         fontWeight: "900",
@@ -150,6 +258,17 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: "bold",
         color: "#000",
+        marginBottom: 20,
+    },
+    discount: {
+        fontSize: 16,
+        color: "#ff0000",
+        fontWeight: "600",
+        marginBottom: 20,
+    },
+    reviews: {
+        fontSize: 16,
+        fontWeight: "600",
         marginBottom: 20,
     },
     sectionTitle: {
