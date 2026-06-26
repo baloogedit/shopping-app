@@ -1,27 +1,38 @@
 import useFetch from "@/hooks/useFetch";
 import { FlatList, Text, TouchableOpacity, View, StyleSheet } from "react-native";
+import { useRouter } from "expo-router";
 
 export default function HomeScreen() {
 
     const { data } = useFetch("https://dummyjson.com/products/category-list");
 
+    const router = useRouter();
+
+
     const renderItem = ({ item }: { item: any }) => {
         return (
             <TouchableOpacity style={
                 {
-                    backgroundColor: "lightgray",
+                    backgroundColor: "#202841",
                     margin: 30,
                     borderWidth: 3,
-                    borderRadius: 10,
+                    borderRadius: 30,
+
                 }}
+                onPress={() => router.push(
+                {
+                    pathname: "/home/[products]",
+                    params: { products: item },
+                })}
             >
                 <View>
                     <Text
                         style={{
                             textTransform: "capitalize",
                             fontSize: 25,
-                            color: "black",
+                            color: "white",
                             fontWeight: "900",
+                            margin: 10,
                         }}
                     >
                         {item}
