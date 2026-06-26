@@ -1,6 +1,6 @@
 import useFetch from "@/hooks/useFetch";
-import { FlatList, Text, TouchableOpacity, View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function HomeScreen() {
 
