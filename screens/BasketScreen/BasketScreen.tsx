@@ -22,7 +22,14 @@ export default function BasketScreen() {
 
     const renderItem = ({ item }: { item: any }) => (
         <View style={styles.cartItem}>
-            <Image source={{ uri: item.thumbnail }} style={styles.itemImage} />
+            <TouchableOpacity
+                onPress={() => router.push(`home/product/${item.id}` as any)}
+            >
+                <Image
+                    source={{ uri: item.thumbnail }}
+                    style={styles.itemImage}
+                />
+            </TouchableOpacity>
             <View style={styles.itemDetails}>
                 <Text style={styles.itemTitle} numberOfLines={2}>
                     {item.title}
