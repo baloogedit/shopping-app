@@ -1,3 +1,4 @@
+import { CartProvider } from "@/context/CartContext";
 import { Stack } from "expo-router";
 import { StyleSheet } from "react-native";
 import "react-native-reanimated";
@@ -5,11 +6,20 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function RootLayout() {
     return (
-        <SafeAreaView style={styles.safeArea}>
-            <Stack>
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            </Stack>
-        </SafeAreaView>
+        <CartProvider>
+            <SafeAreaView style={styles.safeArea}>
+                <Stack>
+                    <Stack.Screen
+                        name="(tabs)"
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="checkout"
+                        options={{ headerShown: false }}
+                    />
+                </Stack>
+            </SafeAreaView>
+        </CartProvider>
     );
 }
 

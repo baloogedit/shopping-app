@@ -11,6 +11,9 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
+// 1. Add this import at the top
+import { useCart } from "@/context/CartContext";
+import { Alert } from "react-native";
 
 export default function ProductDetailScreen() {
     const { productdetail } = useLocalSearchParams<{ productdetail: string }>();
@@ -21,6 +24,7 @@ export default function ProductDetailScreen() {
         `https://dummyjson.com/products/${productdetail}`,
     );
     const product: any = data;
+    const { addToCart } = useCart();
 
     return (
         <View style={styles.container}>
@@ -151,7 +155,16 @@ export default function ProductDetailScreen() {
                         </View>
                     </ScrollView>
                     <View style={styles.bottomBar}>
-                        <TouchableOpacity style={styles.addToCartButton}>
+                        <TouchableOpacity
+                            style={styles.addToCartButton}
+                            onPress={() => {
+                                addToCart(product, quantity);
+                                Alert.alert(
+                                    "Success",
+                                    "Product added to basket!",
+                                );
+                            }}
+                        >
                             <Text style={styles.addToCartText}>
                                 Add to Basket
                             </Text>
