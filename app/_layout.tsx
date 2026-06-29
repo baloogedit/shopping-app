@@ -17,6 +17,10 @@ export default function RootLayout() {
                         name="checkout"
                         options={{ headerShown: false }}
                     />
+                    <Stack.Screen
+                        name="review"
+                        options={{ headerShown: false }}
+                    />
                 </Stack>
             </SafeAreaView>
         </CartProvider>

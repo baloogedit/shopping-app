@@ -1,5 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useRouter } from "expo-router";
+import { useState } from "react";
 import {
     Alert,
     ScrollView,
@@ -13,9 +14,21 @@ import {
 export default function CheckoutScreen() {
     const router = useRouter();
 
-    const handlePlaceOrder = () => {
-        Alert.alert("Success!", "Your order has been placed successfully.");
-    };
+    const [fullName, setFullName] = useState("");
+    const [address, setAddress] = useState("");
+    const [city, setCity] = useState("");
+
+    const handleReviewOrder = () => {
+    if (!fullName || !address || !city) {
+      Alert.alert("Missing Details", "Please fill out all shipping fields.");
+      return;
+    }
+    // Navigate to the new review screen and pass the typed data as URL parameters
+    router.push({
+        pathname: '/review',
+        params: { fullName, address, city }
+    });
+  };
 
     return (
         <View style={styles.container}>
@@ -81,10 +94,10 @@ export default function CheckoutScreen() {
 
             <View style={styles.bottomBar}>
                 <TouchableOpacity
-                    style={styles.orderButton}
-                    onPress={handlePlaceOrder}
+                    style={styles.reviewButton}
+                    onPress={handleReviewOrder}
                 >
-                    <Text style={styles.orderButtonText}>Place Order</Text>
+                    <Text style={styles.orderButtonText}>Review Order</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -154,7 +167,7 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
     },
-    orderButton: {
+    reviewButton: {
         backgroundColor: "#202841",
         paddingVertical: 18,
         borderRadius: 30,
