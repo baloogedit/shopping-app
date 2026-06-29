@@ -111,19 +111,19 @@ export default function ReviewOrderScreen() {
                 <View style={styles.totalRow}>
                     <Text style={styles.totalLabel}>Total to Pay:</Text>
                     <Text style={styles.totalAmount}>${total.toFixed(2)}</Text>
-                    <Text
-                        style={{
-                            textAlign: "center",
-                            marginTop: 10,
-                            color: "#202841",
-                        }}
-                    >
-                        payment method:{" "}
-                        {cardNumber
-                            ? `**** **** **** ${cardNumber.slice(-4)}`
-                            : "N/A"}
-                    </Text>
                 </View>
+                <Text
+                    style={{
+                        textAlign: "center",
+                        marginBottom: 60,
+                        color: "#202841",
+                    }}
+                >
+                    payment method:{" "}
+                    {cardNumber
+                        ? `**** **** **** ${cardNumber.slice(-4)}`
+                        : "N/A"}
+                </Text>
             </ScrollView>
 
             <View style={styles.bottomBar}>
@@ -132,12 +132,17 @@ export default function ReviewOrderScreen() {
                     onPress={handleConfirmOrder}
                 >
                     <Text style={styles.confirmButtonText}>Confirm & Pay</Text>
-                    <Text>
-                        {" "}
-                        By clicking this button, you agree to our Terms and
-                        Conditions.
-                    </Text>
                 </TouchableOpacity>
+                <Text
+                    style={{
+                        textAlign: "center",
+                        marginTop: 10,
+                        color: "#202841",
+                    }}
+                >
+                    By clicking this button, you agree to our Terms and
+                    Conditions.
+                </Text>
             </View>
         </View>
     );
@@ -220,7 +225,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#202841",
         padding: 20,
         borderRadius: 15,
-        marginBottom: 20,
+        marginBottom: 10,
     },
     totalLabel: { fontSize: 18, color: "#fff", fontWeight: "bold" },
     totalAmount: { fontSize: 24, fontWeight: "900", color: "#fff" },
