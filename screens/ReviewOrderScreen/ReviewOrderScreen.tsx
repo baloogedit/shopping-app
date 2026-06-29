@@ -14,13 +14,15 @@ import {
 export default function ReviewOrderScreen() {
     const router = useRouter();
 
-    const { fullName, address, city, zipCode, phoneNumber } = useLocalSearchParams<{
-        fullName: string;
-        address: string;
-        city: string;
-        zipCode: string;
-        phoneNumber: string;
-    }>();
+    const { fullName, address, city, zipCode, phoneNumber, cardNumber } =
+        useLocalSearchParams<{
+            fullName: string;
+            address: string;
+            city: string;
+            zipCode: string;
+            phoneNumber: string;
+            cardNumber: string;
+        }>();
 
     const { cartItems, clearCart } = useCart();
 
@@ -83,11 +85,19 @@ export default function ReviewOrderScreen() {
                 <View style={styles.cardContainer}>
                     <Ionicons name="location" size={24} color="#5351bd" />
                     <View style={{ marginLeft: 15 }}>
-                        <Text style={styles.shippingTextBold}>{fullName}</Text>
-                        <Text style={styles.shippingText}>{phoneNumber}</Text>
-                        <Text style={styles.shippingText}>{address}</Text>
-                        <Text style={styles.shippingText}>{city}</Text>
-                        <Text style={styles.shippingText}>{zipCode}</Text>
+                        <Text style={styles.shippingTextBold}>
+                            Full Name: {fullName}
+                        </Text>
+                        <Text style={styles.shippingText}>
+                            Phone Number: {phoneNumber}
+                        </Text>
+                        <Text style={styles.shippingText}>
+                            Address: {address}
+                        </Text>
+                        <Text style={styles.shippingText}>City: {city}</Text>
+                        <Text style={styles.shippingText}>
+                            Zip Code: {zipCode}
+                        </Text>
                     </View>
                 </View>
 
@@ -101,6 +111,18 @@ export default function ReviewOrderScreen() {
                 <View style={styles.totalRow}>
                     <Text style={styles.totalLabel}>Total to Pay:</Text>
                     <Text style={styles.totalAmount}>${total.toFixed(2)}</Text>
+                    <Text
+                        style={{
+                            textAlign: "center",
+                            marginTop: 10,
+                            color: "#202841",
+                        }}
+                    >
+                        payment method:{" "}
+                        {cardNumber
+                            ? `**** **** **** ${cardNumber.slice(-4)}`
+                            : "N/A"}
+                    </Text>
                 </View>
             </ScrollView>
 
@@ -110,6 +132,11 @@ export default function ReviewOrderScreen() {
                     onPress={handleConfirmOrder}
                 >
                     <Text style={styles.confirmButtonText}>Confirm & Pay</Text>
+                    <Text>
+                        {" "}
+                        By clicking this button, you agree to our Terms and
+                        Conditions.
+                    </Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -154,12 +181,12 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     shippingTextBold: {
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: "bold",
         color: "#202841",
         marginBottom: 4,
     },
-    shippingText: { fontSize: 14, color: "#dc0707", marginBottom: 2 },
+    shippingText: { fontSize: 16, color: "#000000", marginBottom: 2 },
 
     itemsContainer: {
         backgroundColor: "#fff",

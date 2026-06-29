@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Stack, useRouter } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
     Alert,
     ScrollView,
@@ -19,18 +20,63 @@ export default function CheckoutScreen() {
     const [city, setCity] = useState("");
     const [zipCode, setZipCode] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [cardNumber, setCardNumber] = useState("");
+
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        const loadContactData = async () => {
+            try {
+                const savedData = await AsyncStorage.getItem("@contact_data");
+                if (savedData) {
+                    const parsedData = JSON.parse(savedData);
+                    setFullName(parsedData.fullName || "");
+                    setPhoneNumber(parsedData.phoneNumber || "");
+                    setAddress(parsedData.address || "");
+                    setCity(parsedData.city || "");
+                    setZipCode(parsedData.zipCode || "");
+                    setCardNumber(parsedData.cardNumber || "");
+                }
+            } catch (error) {
+                console.error("Failed to load contact data", error);
+            } finally {
+                setIsLoaded(true);
+            }
+        };
+
+        loadContactData();
+    }, []);
+
+    // 3. SAVE data automatically whenever the user types something
+    useEffect(() => {
+        if (isLoaded) {
+            const saveContactData = async () => {
+                const contactData = { fullName, phoneNumber, address, city, zipCode, cardNumber };
+                try {
+                    await AsyncStorage.setItem("@contact_data", JSON.stringify(contactData));
+                } catch (error) {
+                    console.error("Failed to save contact data", error);
+                }
+            };
+            
+            saveContactData();
+        }
+    }, [fullName, phoneNumber, address, city, zipCode, cardNumber, isLoaded]);
 
     const handleReviewOrder = () => {
-    // if (!fullName || !address || !city) {
-    //   Alert.alert("Missing Details", "Please fill out all shipping fields.");
-    //   return;
-    // }
-    
-    router.push({
-        pathname: '/review',
-        params: { fullName, address, city, zipCode, phoneNumber }
-    });
-  };
+        if (!fullName || !address || !city || !cardNumber) {
+            Alert.alert(
+                "Missing Details",
+                "Please fill out all fields.",
+            );
+            return;
+        }
+
+        router.push({
+            pathname: "/review",
+            params: { fullName, address, city, zipCode, phoneNumber, cardNumber },
+        });
+    };
 
     return (
         <View style={styles.container}>
@@ -95,6 +141,9 @@ export default function CheckoutScreen() {
                         style={styles.cardText}
                         placeholder="**** **** **** ****"
                         placeholderTextColor="#888"
+                        value={cardNumber}
+                        onChangeText={setCardNumber}
+                        keyboardType="numeric"
                     />
                     <Ionicons
                         name="checkmark-circle"
