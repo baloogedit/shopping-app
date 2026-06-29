@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
 
     bottomBar: {
         backgroundColor: "#fff",
-        padding: 5,
+        padding: 15,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
         position: "absolute",
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     totalPrice: { fontSize: 24, fontWeight: "900", color: "#202841" },
     checkoutButton: {
         backgroundColor: "#202841",
-        paddingVertical: 18,
+        paddingVertical: 15,
         borderRadius: 30,
         alignItems: "center",
     },
