@@ -1,6 +1,6 @@
 import { useCart } from "@/context/CartContext";
 import { Ionicons } from "@expo/vector-icons";
-import { Stack, useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import {
     Alert,
     Image,
@@ -14,10 +14,12 @@ import {
 export default function ReviewOrderScreen() {
     const router = useRouter();
 
-    const { fullName, address, city } = useLocalSearchParams<{
+    const { fullName, address, city, zipCode, phoneNumber } = useLocalSearchParams<{
         fullName: string;
         address: string;
         city: string;
+        zipCode: string;
+        phoneNumber: string;
     }>();
 
     const { cartItems, clearCart } = useCart();
@@ -62,8 +64,6 @@ export default function ReviewOrderScreen() {
 
     return (
         <View style={styles.container}>
-            <Stack.Screen options={{ headerShown: false }} />
-
             <View style={styles.headerContainer}>
                 <TouchableOpacity
                     onPress={() => router.back()}
@@ -84,8 +84,10 @@ export default function ReviewOrderScreen() {
                     <Ionicons name="location" size={24} color="#5351bd" />
                     <View style={{ marginLeft: 15 }}>
                         <Text style={styles.shippingTextBold}>{fullName}</Text>
+                        <Text style={styles.shippingText}>{phoneNumber}</Text>
                         <Text style={styles.shippingText}>{address}</Text>
                         <Text style={styles.shippingText}>{city}</Text>
+                        <Text style={styles.shippingText}>{zipCode}</Text>
                     </View>
                 </View>
 
@@ -121,7 +123,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "space-between",
         paddingHorizontal: 20,
-        paddingTop: 60,
+        paddingTop: 20,
         paddingBottom: 20,
     },
     backButton: {
@@ -157,7 +159,7 @@ const styles = StyleSheet.create({
         color: "#202841",
         marginBottom: 4,
     },
-    shippingText: { fontSize: 14, color: "#555", marginBottom: 2 },
+    shippingText: { fontSize: 14, color: "#dc0707", marginBottom: 2 },
 
     itemsContainer: {
         backgroundColor: "#fff",

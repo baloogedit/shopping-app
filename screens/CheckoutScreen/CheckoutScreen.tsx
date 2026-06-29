@@ -17,16 +17,18 @@ export default function CheckoutScreen() {
     const [fullName, setFullName] = useState("");
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
+    const [zipCode, setZipCode] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
 
     const handleReviewOrder = () => {
-    if (!fullName || !address || !city) {
-      Alert.alert("Missing Details", "Please fill out all shipping fields.");
-      return;
-    }
-    // Navigate to the new review screen and pass the typed data as URL parameters
+    // if (!fullName || !address || !city) {
+    //   Alert.alert("Missing Details", "Please fill out all shipping fields.");
+    //   return;
+    // }
+    
     router.push({
         pathname: '/review',
-        params: { fullName, address, city }
+        params: { fullName, address, city, zipCode, phoneNumber }
     });
   };
 
@@ -54,26 +56,36 @@ export default function CheckoutScreen() {
                     style={styles.input}
                     placeholder="Full Name"
                     placeholderTextColor="#888"
+                    value={fullName}
+                    onChangeText={setFullName}
                 />
                 <TextInput
                     style={styles.input}
                     placeholder="Phone Number"
                     placeholderTextColor="#888"
+                    value={phoneNumber}
+                    onChangeText={setPhoneNumber}
                 />
                 <TextInput
                     style={styles.input}
                     placeholder="Street Address, Apartment, Suite, etc."
                     placeholderTextColor="#888"
+                    value={address}
+                    onChangeText={setAddress}
                 />
                 <TextInput
                     style={styles.input}
                     placeholder="City"
                     placeholderTextColor="#888"
+                    value={city}
+                    onChangeText={setCity}
                 />
                 <TextInput
                     style={styles.input}
                     placeholder="Zip Code"
                     placeholderTextColor="#888"
+                    value={zipCode}
+                    onChangeText={setZipCode}
                 />
 
                 <Text style={styles.sectionTitle}>Payment Method</Text>

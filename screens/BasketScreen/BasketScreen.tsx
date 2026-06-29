@@ -3,7 +3,6 @@ import { useRouter } from "expo-router";
 import {
     FlatList,
     Image,
-    ScrollView,
     StyleSheet,
     Text,
     TouchableOpacity,
@@ -62,20 +61,18 @@ export default function BasketScreen() {
 
     return (
         <View style={styles.container}>
-            <ScrollView style={styles.scrollContent}>
-                <Text style={styles.header}>My Basket</Text>
+            <Text style={styles.header}>My Basket</Text>
 
-                {cartItems.length === 0 ? (
-                    <Text style={styles.emptyText}>Your basket is empty!</Text>
-                ) : (
-                    <FlatList
-                        data={cartItems}
-                        renderItem={renderItem}
-                        keyExtractor={(item) => item.id.toString()}
-                        contentContainerStyle={styles.listContent}
-                    />
-                )}
-            </ScrollView>
+            {cartItems.length === 0 ? (
+                <Text style={styles.emptyText}>Your basket is empty!</Text>
+            ) : (
+                <FlatList
+                    data={cartItems}
+                    renderItem={renderItem}
+                    keyExtractor={(item) => item.id.toString()}
+                    contentContainerStyle={styles.listContent}
+                />
+            )}
             <View style={styles.bottomBar}>
                 <View style={styles.totalRow}>
                     <Text style={styles.totalText}>Total:</Text>
@@ -99,7 +96,6 @@ export default function BasketScreen() {
 }
 
 const styles = StyleSheet.create({
-    scrollContent: { paddingBottom: 150 },
     container: { flex: 1, backgroundColor: "#aab9e7", paddingTop: 60 },
     header: {
         fontSize: 28,
